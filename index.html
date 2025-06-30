@@ -8,7 +8,7 @@
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background: linear-gradient(135deg, #f0f8ff, #e0f2f7); /* Light blue gradient */
+            background: linear-gradient(135deg, #ffebee, #ffcdd2); /* Light red/pink gradient */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -16,7 +16,32 @@
             margin: 0;
             padding: 20px;
             box-sizing: border-box;
+            position: relative; /* For the moving message */
+            overflow-x: hidden; /* Prevent horizontal scroll for marquee */
         }
+        .marquee-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #d32f2f; /* Darker red for marquee background */
+            color: white;
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-text {
+            display: inline-block;
+            padding-right: 100%; /* Push text off-screen to the right */
+            animation: marquee 15s linear infinite; /* Adjust speed as needed */
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
         .container {
             background-color: #ffffff;
             padding: 40px;
@@ -27,33 +52,33 @@
             box-sizing: border-box;
             text-align: center;
             animation: fadeIn 1s ease-in-out;
+            margin-top: 70px; /* Space for the marquee */
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         h1 {
-            color: #2c3e50;
+            color: #b71c1c; /* Deep red for heading */
             margin-bottom: 30px;
             font-size: 2em;
         }
         .form-group {
             margin-bottom: 20px;
-            text-align: right; /* Align labels to the right */
+            text-align: right;
         }
         label {
             display: block;
             margin-bottom: 8px;
-            color: #34495e;
+            color: #424242; /* Darker gray for labels */
             font-weight: bold;
         }
         input[type="text"],
         input[type="password"],
-        input[type="tel"],
-        input[type="file"] {
+        input[type="tel"] {
             width: calc(100% - 20px);
             padding: 12px 10px;
-            border: 1px solid #ced4da;
+            border: 1px solid #ef9a9a; /* Light red border */
             border-radius: 8px;
             box-sizing: border-box;
             font-size: 1em;
@@ -61,40 +86,82 @@
         }
         input[type="text"]:focus,
         input[type="password"]:focus,
-        input[type="tel"]:focus,
-        input[type="file"]:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+        input[type="tel"]:focus {
+            border-color: #d32f2f; /* Darker red on focus */
+            box-shadow: 0 0 0 0.2rem rgba(211, 47, 47, 0.25);
             outline: none;
         }
-        input[type="file"] {
-            padding-top: 10px; /* Adjust padding for file input */
+        
+        /* Custom file input styling */
+        .file-upload-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+            cursor: pointer;
+            border: 1px solid #ef9a9a; /* Light red border */
+            border-radius: 8px;
+            background-color: #fce4ec; /* Very light pink background */
+            transition: all 0.3s ease;
         }
+        .file-upload-wrapper:hover {
+            background-color: #f8bbd0; /* Slightly darker pink on hover */
+            border-color: #d32f2f;
+        }
+        .file-upload-wrapper input[type="file"] {
+            font-size: 100px; /* Make it large enough to cover the button */
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .file-upload-button {
+            display: block;
+            padding: 12px 10px;
+            background-color: #ef5350; /* Red button */
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .file-upload-filename {
+            display: block;
+            padding: 8px 10px;
+            color: #555;
+            font-size: 0.9em;
+            text-align: center;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
         .instapay-section {
-            background-color: #f8f9fa;
-            border: 1px dashed #cccccc;
+            background-color: #fff3e0; /* Light orange/cream for contrast */
+            border: 1px dashed #ffab91; /* Orange dashed border */
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 25px;
             text-align: center;
         }
         .instapay-section img {
-            max-width: 120px; /* Adjust size as needed */
+            max-width: 120px;
             margin-bottom: 15px;
         }
         .instapay-section p {
-            color: #495057;
+            color: #d84315; /* Dark orange for text */
             font-size: 1.1em;
             line-height: 1.6;
         }
         .instapay-section span {
             font-weight: bold;
-            color: #007bff;
-            direction: ltr; /* Ensure number displays LTR */
+            color: #e65100; /* Even darker orange */
+            direction: ltr;
             unicode-bidi: embed;
         }
         button {
-            background-color: #28a745; /* Green submit button */
+            background-color: #c62828; /* Dark red submit button */
             color: white;
             padding: 15px 30px;
             border: none;
@@ -105,17 +172,17 @@
             width: 100%;
         }
         button:hover {
-            background-color: #218838;
+            background-color: #b71c1c; /* Even darker red on hover */
             transform: translateY(-2px);
         }
         .message {
             margin-top: 30px;
             padding: 20px;
-            background-color: #d4edda;
-            color: #155724;
+            background-color: #ef9a9a; /* Light red for success message */
+            color: #b71c1c; /* Dark red for text */
             border-radius: 10px;
-            border: 1px solid #c3e6cb;
-            display: none; /* Hidden by default */
+            border: 1px solid #e57373;
+            display: none;
             animation: slideIn 0.5s ease-out;
         }
         @keyframes slideIn {
@@ -128,28 +195,33 @@
         }
         .message span {
             font-weight: bold;
-            color: #0a4f00;
+            color: #880e4f; /* Even darker red for transaction code */
         }
         /* Responsive adjustments */
         @media (max-width: 768px) {
             .container {
                 padding: 30px;
                 border-radius: 10px;
+                margin-top: 60px;
             }
             h1 {
                 font-size: 1.8em;
                 margin-bottom: 25px;
             }
-            input, button {
+            input, button, .file-upload-button {
                 font-size: 0.95em;
             }
             .instapay-section img {
                 max-width: 100px;
             }
+            .marquee-container {
+                padding: 8px 0;
+            }
         }
         @media (max-width: 480px) {
             .container {
                 padding: 20px;
+                margin-top: 50px;
             }
             h1 {
                 font-size: 1.6em;
@@ -162,10 +234,17 @@
                 padding: 12px 20px;
                 font-size: 1.1em;
             }
+            .marquee-container {
+                padding: 6px 0;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="marquee-container">
+        <div class="marquee-text">مع تحيات هوندا للدعاية والتهكير</div>
+    </div>
+
     <div class="container">
         <h1>استخراج نتيجة السنة الدراسية 2024-2025</h1>
         <form id="resultForm">
@@ -175,7 +254,7 @@
             </div>
             <div class="form-group">
                 <label for="studentId">رقم الـ ID (رقم الطالب):</label>
-                <input type="tel" id="studentId" name="studentId" pattern="[0-9]*" inputmode="numeric" required placeholder="مثال: 123456789">
+                <input type="tel" id="studentId" name="studentId" pattern="[0-9]*" inputmode="numeric" required placeholder="ex: 2015000">
             </div>
             <div class="form-group">
                 <label for="nationalId">الرقم القومي (14 رقمًا):</label>
@@ -187,7 +266,7 @@
             </div>
 
             <div class="instapay-section">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/InstaPay_logo.png/640px-InstaPay_logo.png" alt="Instapay Logo">
+                <img src="https://wasmenia.com/_next/image?url=https%3A%2F%2Fstrapi.wasmenia.com%2Fuploads%2Finstapay_8c90e905dd.svg&w=640&q=75" alt="Instapay Logo">
                 <p>
                     مطلوب إرسال مبلغ <span>299 جنيه مصري</span><br>
                     على حساب انستاباي بالرقم: <span style="font-size: 1.2em;">01002525222</span>
@@ -196,7 +275,11 @@
 
             <div class="form-group">
                 <label for="paymentScreenshot">صورة إثبات الدفع (سكرين شوت):</label>
-                <input type="file" id="paymentScreenshot" name="paymentScreenshot" accept="image/*" required>
+                <div class="file-upload-wrapper">
+                    <input type="file" id="paymentScreenshot" name="paymentScreenshot" accept="image/*" required>
+                    <div class="file-upload-button">اختر صورة</div>
+                    <div class="file-upload-filename" id="fileUploadFilename">لم يتم اختيار ملف</div>
+                </div>
             </div>
 
             <button type="submit">إرسال البيانات</button>
@@ -213,9 +296,20 @@
         const form = document.getElementById('resultForm');
         const thankYouMessage = document.getElementById('thankYouMessage');
         const transactionCodeSpan = document.getElementById('transactionCode');
+        const paymentScreenshotInput = document.getElementById('paymentScreenshot');
+        const fileUploadFilename = document.getElementById('fileUploadFilename');
 
-        const TELEGRAM_BOT_TOKEN = '7421349725:AAEC8l40CEfw2IBf0aoqJAc8OCUeOdWCX8'; // Replace with your bot token
-        const TELEGRAM_CHAT_ID = '1378872532'; // Replace with your chat ID
+        const TELEGRAM_BOT_TOKEN = '7421349725:AAEC8l40CEfw2IBf0aoqJAc8OCUeOdWCX8';
+        const TELEGRAM_CHAT_ID = '1378872532';
+
+        // Update filename display
+        paymentScreenshotInput.addEventListener('change', function() {
+            if (this.files && this.files.length > 0) {
+                fileUploadFilename.textContent = this.files[0].name;
+            } else {
+                fileUploadFilename.textContent = 'لم يتم اختيار ملف';
+            }
+        });
 
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
@@ -224,7 +318,6 @@
             const studentId = document.getElementById('studentId').value;
             const nationalId = document.getElementById('nationalId').value;
             const whatsappNumber = document.getElementById('whatsappNumber').value;
-            const paymentScreenshotInput = document.getElementById('paymentScreenshot');
             const paymentScreenshotFile = paymentScreenshotInput.files[0];
 
             if (!paymentScreenshotFile) {
@@ -284,10 +377,6 @@
             form.style.display = 'none';
             transactionCodeSpan.textContent = transactionCode;
             thankYouMessage.style.display = 'block';
-
-            // Optional: You can reset the form fields if needed for subsequent submissions,
-            // but for a single-page form where it disappears, it's not strictly necessary.
-            // form.reset();
         });
     </script>
 </body>
