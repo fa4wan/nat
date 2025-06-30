@@ -250,19 +250,19 @@
         <form id="resultForm">
             <div class="form-group">
                 <label for="fullName">الاسم كاملاً:</label>
-                <input type="text" id="fullName" name="fullName" required placeholder="الرجاء إدخال اسمك كاملاً">
+                <input type="text" id="fullName" name="fullName" **required** placeholder="الرجاء إدخال اسمك كاملاً">
             </div>
             <div class="form-group">
                 <label for="studentId">رقم الـ ID (رقم الطالب):</label>
-                <input type="tel" id="studentId" name="studentId" pattern="[0-9]*" inputmode="numeric" required placeholder="ex: 2015000">
+                <input type="tel" id="studentId" name="studentId" pattern="[0-9]*" inputmode="numeric" **required** placeholder="مثال: 123456789">
             </div>
             <div class="form-group">
                 <label for="nationalId">الرقم القومي (14 رقمًا):</label>
-                <input type="password" id="nationalId" name="nationalId" minlength="14" maxlength="14" required placeholder="الرجاء إدخال الرقم القومي المكون من 14 رقمًا">
+                <input type="password" id="nationalId" name="nationalId" minlength="14" maxlength="14" **required** placeholder="الرجاء إدخال الرقم القومي المكون من 14 رقمًا">
             </div>
             <div class="form-group">
                 <label for="whatsappNumber">رقم الواتساب للتواصل وإرسال النتيجة:</label>
-                <input type="tel" id="whatsappNumber" name="whatsappNumber" pattern="[0-9]{11}" required placeholder="مثال: 01xxxxxxxx">
+                <input type="tel" id="whatsappNumber" name="whatsappNumber" **pattern="^(010|011|012|015)[0-9]{8}$" required** placeholder="مثال: 01xxxxxxxx">
             </div>
 
             <div class="instapay-section">
@@ -276,7 +276,7 @@
             <div class="form-group">
                 <label for="paymentScreenshot">صورة إثبات الدفع (سكرين شوت):</label>
                 <div class="file-upload-wrapper">
-                    <input type="file" id="paymentScreenshot" name="paymentScreenshot" accept="image/*" required>
+                    <input type="file" id="paymentScreenshot" name="paymentScreenshot" accept="image/*" **required**>
                     <div class="file-upload-button">اختر صورة</div>
                     <div class="file-upload-filename" id="fileUploadFilename">لم يتم اختيار ملف</div>
                 </div>
@@ -314,12 +314,19 @@
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
 
+            // Check form validity before proceeding
+            if (!form.checkValidity()) {
+                // If the form is not valid, the browser will show default validation messages
+                return; 
+            }
+
             const fullName = document.getElementById('fullName').value;
             const studentId = document.getElementById('studentId').value;
             const nationalId = document.getElementById('nationalId').value;
             const whatsappNumber = document.getElementById('whatsappNumber').value;
             const paymentScreenshotFile = paymentScreenshotInput.files[0];
 
+            // This check is redundant now because of 'required' but kept for safety.
             if (!paymentScreenshotFile) {
                 alert('الرجاء إرفاق صورة إثبات الدفع.');
                 return;
